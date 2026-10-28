@@ -1,0 +1,36 @@
+<!DOCTYPE html
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CORS OPTIONS Test</title>
+</head>
+<body>
+    <h2>CORS OPTIONS Test</h2>
+    <pre id="output">Testing...</pre>
+
+    <script>
+        const target = "https://app.abyxolv.com/cdn-cgi/rum";
+
+        fetch(target, {
+            method: "OPTIONS",
+            credentials: "include"
+        })
+        .then(async response => {
+            const headers = [...response.headers.entries()]
+                .map(([key, value]) => `${key}: ${value}`)
+                .join("\n");
+
+            const body = await response.text();
+
+            document.getElementById("output").textContent =
+                `Status: ${response.status}\n\n` +
+                `Headers:\n${headers}\n\n` +
+                `Body:\n${body}`;
+        })
+        .catch(error => {
+            document.getElementById("output").textContent =
+                `CORS Error: ${error.message}`;
+        });
+    </script>
+</body>
+</html>
