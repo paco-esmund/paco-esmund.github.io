@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+fetch("https://app.abyxolv.com/cdn-cgi/rum", {
+    credentials: "include"
+})
+.then(response => response.text())
+.then(data => {
+    console.log("CORS response:", data);
+    document.body.textContent = data;
+})
+.catch(error => console.error("CORS blocked:", error));
+</script>
+</body>
+</html>
